@@ -28,28 +28,23 @@ l298n_err_t l298n_deinitialize(l298n_t* l298n)
     return L298N_ERR_OK;
 }
 
-l298n_err_t l298n_set_voltage(l298n_t const* l298n, l298n_channel_type_t type, float voltage)
+l298n_err_t l298n_get_voltage(l298n_t const* l298n, l298n_channel_type_t type, float32_t* voltage)
+{
+    assert(l298n && voltage);
+
+    return l298n_channel_get_voltage(l298n_get_channel(l298n, type), voltage);
+}
+
+l298n_err_t l298n_set_voltage(l298n_t const* l298n, l298n_channel_type_t type, float32_t voltage)
 {
     assert(l298n);
 
     return l298n_channel_set_voltage(l298n_get_channel(l298n, type), voltage);
 }
 
-l298n_err_t l298n_set_max_voltage(l298n_t const* l298n, l298n_channel_type_t type)
-{
-    assert(l298n);
-
-    return l298n_channel_set_max_voltage(l298n_get_channel(l298n, type));
-}
-
-l298n_err_t l298n_set_min_voltage(l298n_t const* l298n, l298n_channel_type_t type)
-{
-    assert(l298n);
-
-    return l298n_channel_set_min_voltage(l298n_get_channel(l298n, type));
-}
-
-l298n_err_t l298n_set_direction(l298n_t const* l298n, l298n_channel_type_t type, l298n_direction_t direction)
+l298n_err_t l298n_set_direction(l298n_t const* l298n,
+                                l298n_channel_type_t type,
+                                l298n_direction_t direction)
 {
     assert(l298n);
 
